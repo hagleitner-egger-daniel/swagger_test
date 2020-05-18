@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Hagleitner External API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/catalogV1/CatalogItem": {
+      "get": {
+        "tags": [
+          "CatalogItem"
+        ],
+        "summary": "Example endpoint",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatalogItemDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatalogItemDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatalogItemDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ErrorCode(USER_ID_NOT_FOUND) user id not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/catalogV1/ComponentType/{componentTypeId}/binary-file/{binaryFileId}": {
+      "post": {
+        "tags": [
+          "ComponentType"
+        ],
+        "parameters": [
+          {
+            "name": "componentTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "binaryFileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ComponentType"
+        ],
+        "parameters": [
+          {
+            "name": "componentTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "binaryFileId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CatalogItemDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "property": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorDto": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
