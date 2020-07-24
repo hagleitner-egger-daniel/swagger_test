@@ -11,6 +11,16 @@
           "DeviceType"
         ],
         "summary": "Get all device types",
+        "parameters": [
+          {
+            "name": "language",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -61,10 +71,15 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
       }
     },
-    "/api/catalogV1/DeviceType/{deviceTypeGuid}": {
+    "/api/catalogV1/DeviceType/{id}": {
       "get": {
         "tags": [
           "DeviceType"
@@ -72,19 +87,20 @@
         "summary": "Get device type by id",
         "parameters": [
           {
-            "name": "deviceTypeId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            }
-          },
-          {
-            "name": "deviceTypeGuid",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "language",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "nullable": true
             }
           }
         ],
@@ -149,25 +165,332 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/catalogV1/DeviceType/{deviceTypeId}/problemcategory": {
+      "get": {
+        "tags": [
+          "DeviceType"
+        ],
+        "summary": "Get problem categories of given device type",
+        "parameters": [
+          {
+            "name": "deviceTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceTypeProblemCategoryDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceTypeProblemCategoryDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeviceTypeProblemCategoryDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
       }
     }
   },
   "components": {
     "schemas": {
-      "ComponentTypeDto": {
+      "TranslationDto": {
         "type": "object",
         "properties": {
-          "id": {
+          "languageTag": {
             "type": "string",
             "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhraseDto": {
+        "type": "object",
+        "properties": {
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TranslationDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CatalogElementDescriptionDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/PhraseDto"
+          },
+          "description": {
+            "$ref": "#/components/schemas/PhraseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BinaryFileDto": {
+        "type": "object",
+        "properties": {
+          "originalFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VersionNumberDto": {
+        "type": "object",
+        "properties": {
+          "versionType": {
+            "type": "string",
+            "nullable": true
+          },
+          "versionText": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComponentTypeVariantVersionDto": {
+        "type": "object",
+        "properties": {
+          "lifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectiveLifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "versionNumber": {
+            "$ref": "#/components/schemas/VersionNumberDto"
+          },
+          "binaryFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFileDto"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComponentTypeVariantDto": {
+        "type": "object",
+        "properties": {
+          "lifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectiveLifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "binaryFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFileDto"
+            },
+            "nullable": true
+          },
+          "componentVariantVersions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComponentTypeDeviceTypeDto": {
+        "type": "object",
+        "properties": {
+          "visibility": {
+            "type": "string",
+            "nullable": true
+          },
+          "exchangeability": {
+            "type": "string",
+            "nullable": true
+          },
+          "isMandatory": {
+            "type": "boolean"
           },
           "children": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ComponentTypeDto"
+              "$ref": "#/components/schemas/ComponentTypeDeviceTypeDto"
             },
             "nullable": true
+          },
+          "lifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectiveLifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "binaryFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFileDto"
+            },
+            "nullable": true
+          },
+          "componentVariants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComponentTypeVariantDto"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
           }
         },
         "additionalProperties": false
@@ -175,14 +498,112 @@
       "DeviceTypeDto": {
         "type": "object",
         "properties": {
-          "id": {
+          "deviceTypeKind": {
             "type": "string",
+            "nullable": true
+          },
+          "lifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectiveLifeCycle": {
+            "type": "string",
+            "nullable": true
+          },
+          "binaryFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFileDto"
+            },
             "nullable": true
           },
           "componentTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ComponentTypeDto"
+              "$ref": "#/components/schemas/ComponentTypeDeviceTypeDto"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemCategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          },
+          "isObsolete": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ComponentTypeProblemCategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComponentTypeProblemCategoryDto"
+            },
+            "nullable": true
+          },
+          "problemCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProblemCategoryDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceTypeProblemCategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "componentTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComponentTypeProblemCategoryDto"
+            },
+            "nullable": true
+          },
+          "problemCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProblemCategoryDto"
             },
             "nullable": true
           }
@@ -249,6 +670,20 @@
           }
         },
         "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://localhost/",
+            "tokenUrl": "https://localhost/",
+            "scopes": {
+              "SCOPE": ""
+            }
+          }
+        }
       }
     }
   }
