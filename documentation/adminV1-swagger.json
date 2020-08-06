@@ -1247,23 +1247,24 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json-patch+json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "formCollection": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/StringStringValuesKeyValuePair"
-                    },
-                    "nullable": true
-                  }
-                }
-              },
-              "encoding": {
-                "formCollection": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
               }
             }
           }
@@ -1978,23 +1979,24 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json-patch+json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "formCollection": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/StringStringValuesKeyValuePair"
-                    },
-                    "nullable": true
-                  }
-                }
-              },
-              "encoding": {
-                "formCollection": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
               }
             }
           }
@@ -2772,23 +2774,24 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json-patch+json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "formCollection": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/StringStringValuesKeyValuePair"
-                    },
-                    "nullable": true
-                  }
-                }
-              },
-              "encoding": {
-                "formCollection": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
               }
             }
           }
@@ -3445,23 +3448,24 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json-patch+json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "formCollection": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/StringStringValuesKeyValuePair"
-                    },
-                    "nullable": true
-                  }
-                }
-              },
-              "encoding": {
-                "formCollection": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/CreateFirmwareVariantVersionDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFirmwareVariantVersionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFirmwareVariantVersionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFirmwareVariantVersionDto"
               }
             }
           }
@@ -3592,23 +3596,24 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json-patch+json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "formCollection": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/StringStringValuesKeyValuePair"
-                    },
-                    "nullable": true
-                  }
-                }
-              },
-              "encoding": {
-                "formCollection": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/UpdateFirmwareVariantVersionDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFirmwareVariantVersionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFirmwareVariantVersionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFirmwareVariantVersionDto"
               }
             }
           }
@@ -3834,6 +3839,26 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -4038,6 +4063,26 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
           },
           "404": {
             "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
@@ -5575,23 +5620,24 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json-patch+json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "formCollection": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/StringStringValuesKeyValuePair"
-                    },
-                    "nullable": true
-                  }
-                }
-              },
-              "encoding": {
-                "formCollection": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBinaryFileDto"
               }
             }
           }
@@ -6293,20 +6339,28 @@
         },
         "additionalProperties": false
       },
-      "StringStringValuesKeyValuePair": {
+      "CreateBinaryFileDto": {
         "type": "object",
         "properties": {
-          "key": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
+          "description": {
+            "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
           },
-          "value": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
+          "tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "originalFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6587,6 +6641,38 @@
         },
         "additionalProperties": false
       },
+      "CreateFirmwareVersionDto": {
+        "type": "object",
+        "properties": {
+          "isMandatory": {
+            "type": "boolean"
+          },
+          "minimumVersionForUpdateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "description": {
+            "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
+          },
+          "versionNumber": {
+            "$ref": "#/components/schemas/VersionNumberDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateFirmwareVariantVersionDto": {
+        "type": "object",
+        "properties": {
+          "firmwareVersion": {
+            "$ref": "#/components/schemas/CreateFirmwareVersionDto"
+          },
+          "binaryFile": {
+            "$ref": "#/components/schemas/CreateBinaryFileDto"
+          }
+        },
+        "additionalProperties": false
+      },
       "FirmwareVersionDto": {
         "type": "object",
         "properties": {
@@ -6634,63 +6720,60 @@
         },
         "additionalProperties": false
       },
-      "ComponentTypeDeviceTypeDto": {
+      "UpdateFirmwareVersionDto": {
         "type": "object",
         "properties": {
-          "visibility": {
-            "type": "string",
-            "nullable": true
-          },
-          "exchangeability": {
-            "type": "string",
-            "nullable": true
-          },
           "isMandatory": {
             "type": "boolean"
           },
-          "children": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ComponentTypeDeviceTypeDto"
-            },
-            "nullable": true
-          },
-          "lifeCycle": {
+          "minimumVersionForUpdateId": {
             "type": "string",
+            "format": "uuid",
             "nullable": true
-          },
-          "effectiveLifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "binaryFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BinaryFileDto"
-            },
-            "nullable": true
-          },
-          "componentVariants": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ComponentTypeVariantDto"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
           },
           "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+            "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
+          },
+          "versionNumber": {
+            "$ref": "#/components/schemas/VersionNumberDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateBinaryFileDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
+          },
+          "tag": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "originalFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateFirmwareVariantVersionDto": {
+        "type": "object",
+        "properties": {
+          "firmwareVersion": {
+            "$ref": "#/components/schemas/UpdateFirmwareVersionDto"
+          },
+          "binaryFile": {
+            "$ref": "#/components/schemas/UpdateBinaryFileDto"
           }
         },
         "additionalProperties": false
@@ -6698,6 +6781,10 @@
       "DeviceTypeDto": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "deviceTypeKind": {
             "type": "string",
             "nullable": true
@@ -6706,8 +6793,12 @@
             "type": "string",
             "nullable": true
           },
-          "effectiveLifeCycle": {
-            "type": "string",
+          "oemCustomerIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
             "nullable": true
           },
           "binaryFiles": {
@@ -6716,28 +6807,6 @@
               "$ref": "#/components/schemas/BinaryFileDto"
             },
             "nullable": true
-          },
-          "componentTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ComponentTypeDeviceTypeDto"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
           }
         },
         "additionalProperties": false
@@ -6750,6 +6819,14 @@
           },
           "deviceTypeKind": {
             "type": "string",
+            "nullable": true
+          },
+          "oemCustomerIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
             "nullable": true
           }
         },
@@ -7016,6 +7093,253 @@
         },
         "additionalProperties": false
       },
+      "TextBoxDisplayControlDto": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "StringDropDownControlDto": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "valueDisplayBehavior": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NumericDropDownDisplayControlDto": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BigInteger"
+            },
+            "nullable": true
+          },
+          "valueDisplayBehavior": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NumericToggleDisplayControlDto": {
+        "type": "object",
+        "properties": {
+          "falseValue": {
+            "$ref": "#/components/schemas/BigInteger"
+          },
+          "trueValue": {
+            "$ref": "#/components/schemas/BigInteger"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EqualStepBehaviorDto": {
+        "type": "object",
+        "properties": {
+          "startValue": {
+            "$ref": "#/components/schemas/BigInteger"
+          },
+          "stepSize": {
+            "$ref": "#/components/schemas/BigInteger"
+          },
+          "numberOfSteps": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DiscreteStepBehaviorDto": {
+        "type": "object",
+        "properties": {
+          "discreteValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BigInteger"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SteppingBehaviorDto": {
+        "type": "object",
+        "properties": {
+          "equalStepBehavior": {
+            "$ref": "#/components/schemas/EqualStepBehaviorDto"
+          },
+          "discreteStepBehavior": {
+            "$ref": "#/components/schemas/DiscreteStepBehaviorDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StepDisplayControlDto": {
+        "type": "object",
+        "properties": {
+          "minimumValue": {
+            "$ref": "#/components/schemas/BigInteger"
+          },
+          "maximumValue": {
+            "$ref": "#/components/schemas/BigInteger"
+          },
+          "valueDisplayBehavior": {
+            "type": "string",
+            "nullable": true
+          },
+          "stepControlType": {
+            "type": "string",
+            "nullable": true
+          },
+          "steppingBehavior": {
+            "$ref": "#/components/schemas/SteppingBehaviorDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisplayControlDto": {
+        "type": "object",
+        "properties": {
+          "textBoxDisplayControl": {
+            "$ref": "#/components/schemas/TextBoxDisplayControlDto"
+          },
+          "stringDropDownControl": {
+            "$ref": "#/components/schemas/StringDropDownControlDto"
+          },
+          "numericDropDownDisplayControl": {
+            "$ref": "#/components/schemas/NumericDropDownDisplayControlDto"
+          },
+          "numericToggleDisplayControl": {
+            "$ref": "#/components/schemas/NumericToggleDisplayControlDto"
+          },
+          "stepDisplayControl": {
+            "$ref": "#/components/schemas/StepDisplayControlDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FactorConstantConversionDto": {
+        "type": "object",
+        "properties": {
+          "conversionFactor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "conversionConstant": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnitConversionDto": {
+        "type": "object",
+        "properties": {
+          "factorConstantConversion": {
+            "$ref": "#/components/schemas/FactorConstantConversionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DisplayPostfixDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/PhraseDto"
+          },
+          "abbreviation": {
+            "$ref": "#/components/schemas/PhraseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NumericDisplayHintDto": {
+        "type": "object",
+        "properties": {
+          "unitConversion": {
+            "$ref": "#/components/schemas/UnitConversionDto"
+          },
+          "formatString": {
+            "type": "string",
+            "nullable": true
+          },
+          "displayPostfix": {
+            "$ref": "#/components/schemas/DisplayPostfixDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringDisplayHintDto": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "DisplayHintDto": {
+        "type": "object",
+        "properties": {
+          "displayControl": {
+            "$ref": "#/components/schemas/DisplayControlDto"
+          },
+          "numericDisplayHint": {
+            "$ref": "#/components/schemas/NumericDisplayHintDto"
+          },
+          "stringDisplayHint": {
+            "$ref": "#/components/schemas/StringDisplayHintDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NumericValueClassificationDto": {
+        "type": "object",
+        "properties": {
+          "range": {
+            "$ref": "#/components/schemas/NumericRangeDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringValueClassificationDto": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValueClassificationDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/PhraseDto"
+          },
+          "description": {
+            "$ref": "#/components/schemas/PhraseDto"
+          },
+          "iconId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "numericValueClassification": {
+            "$ref": "#/components/schemas/NumericValueClassificationDto"
+          },
+          "stringValueClassification": {
+            "$ref": "#/components/schemas/StringValueClassificationDto"
+          }
+        },
+        "additionalProperties": false
+      },
       "ResourceTypeDto": {
         "type": "object",
         "properties": {
@@ -7047,6 +7371,16 @@
           },
           "valueInspectionRules": {
             "$ref": "#/components/schemas/ValueInspectionRuleCollectionDto"
+          },
+          "displayHint": {
+            "$ref": "#/components/schemas/DisplayHintDto"
+          },
+          "valueClassifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValueClassificationDto"
+            },
+            "nullable": true
           },
           "id": {
             "type": "string",
@@ -7210,6 +7544,16 @@
           },
           "valueInspectionRules": {
             "$ref": "#/components/schemas/CreateValueInspectionRuleCollectionDto"
+          },
+          "displayHint": {
+            "$ref": "#/components/schemas/DisplayHintDto"
+          },
+          "valueClassifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValueClassificationDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7240,6 +7584,16 @@
           },
           "valueInspectionRules": {
             "$ref": "#/components/schemas/CreateValueInspectionRuleCollectionDto"
+          },
+          "displayHint": {
+            "$ref": "#/components/schemas/DisplayHintDto"
+          },
+          "valueClassifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValueClassificationDto"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
