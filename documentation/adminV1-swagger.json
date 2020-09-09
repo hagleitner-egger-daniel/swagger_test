@@ -5,7 +5,7 @@
     "version": "v1"
   },
   "paths": {
-    "/api/adminV1/BinaryFile/{id}": {
+    "/api/admin/v1/binary-files/{id}": {
       "get": {
         "tags": [
           "BinaryFile"
@@ -71,12 +71,12 @@
         ]
       }
     },
-    "/api/adminV1/CatalogItem": {
+    "/api/admin/v1/component-types": {
       "get": {
         "tags": [
-          "CatalogItem"
+          "ComponentType"
         ],
-        "summary": "Example endpoint",
+        "summary": "Gets collection of component types",
         "responses": {
           "200": {
             "description": "Success",
@@ -85,7 +85,20 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogItemDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                      }
+                    ]
                   }
                 }
               },
@@ -93,7 +106,20 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogItemDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                      }
+                    ]
                   }
                 }
               },
@@ -101,28 +127,21 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CatalogItemDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                      }
+                    ]
                   }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "ErrorCode(USER_ID_NOT_FOUND) user id not found ",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorDto"
                 }
               }
             }
@@ -135,25 +154,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType": {
-      "get": {
-        "tags": [
-          "ComponentType"
-        ],
-        "summary": "Gets collection of component types",
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "security": [
-          {
-            "bearer": [ ]
-          }
-        ]
-      }
-    },
-    "/api/adminV1/ComponentType/{id}": {
+    "/api/admin/v1/component-types/{id}": {
       "get": {
         "tags": [
           "ComponentType"
@@ -172,7 +173,63 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                    }
+                  ]
+                }
+              }
+            }
           },
           "404": {
             "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
@@ -269,7 +326,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/non-identifiable": {
+    "/api/admin/v1/component-types/non-identifiable": {
       "post": {
         "tags": [
           "ComponentType"
@@ -301,7 +358,24 @@
         },
         "responses": {
           "201": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComponentTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComponentTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComponentTypeDto"
+                }
+              }
+            }
           },
           "400": {
             "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided ",
@@ -351,7 +425,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/identifiable": {
+    "/api/admin/v1/component-types/identifiable": {
       "post": {
         "tags": [
           "ComponentType"
@@ -383,7 +457,24 @@
         },
         "responses": {
           "201": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                }
+              }
+            }
           },
           "400": {
             "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided ",
@@ -433,7 +524,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/non-identifiable/{id}": {
+    "/api/admin/v1/component-types/non-identifiable/{id}": {
       "put": {
         "tags": [
           "ComponentType"
@@ -476,7 +567,24 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComponentTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComponentTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComponentTypeDto"
+                }
+              }
+            }
           },
           "400": {
             "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided ",
@@ -546,7 +654,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/identifiable/{id}": {
+    "/api/admin/v1/component-types/identifiable/{id}": {
       "put": {
         "tags": [
           "ComponentType"
@@ -589,7 +697,24 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                }
+              }
+            }
           },
           "400": {
             "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided ",
@@ -659,7 +784,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{id}/lifecycle": {
+    "/api/admin/v1/component-types/{id}/life-cycle": {
       "post": {
         "tags": [
           "ComponentType"
@@ -678,7 +803,63 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                    }
+                  ]
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/IdentifiableComponentTypeDto"
+                    }
+                  ]
+                }
+              }
+            }
           },
           "400": {
             "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided ",
@@ -748,12 +929,12 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/problemcategory": {
+    "/api/admin/v1/component-types/{componentTypeId}/fault-categories": {
       "get": {
         "tags": [
           "ComponentType"
         ],
-        "summary": "Get all problem categories",
+        "summary": "Get all fault categories",
         "parameters": [
           {
             "name": "componentTypeId",
@@ -773,7 +954,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               },
@@ -781,7 +962,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               },
@@ -789,7 +970,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               }
@@ -866,7 +1047,7 @@
         "tags": [
           "ComponentType"
         ],
-        "summary": "Create a new problem category",
+        "summary": "Create a new fault category",
         "parameters": [
           {
             "name": "componentTypeId",
@@ -882,22 +1063,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             }
           }
@@ -908,17 +1089,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               }
             }
@@ -991,12 +1172,12 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/problemcategory/{problemCategoryId}": {
+    "/api/admin/v1/component-types/{componentTypeId}/fault-categories/{faultCategoryId}": {
       "put": {
         "tags": [
           "ComponentType"
         ],
-        "summary": "Update problem category",
+        "summary": "Update fault category",
         "parameters": [
           {
             "name": "componentTypeId",
@@ -1008,7 +1189,7 @@
             }
           },
           {
-            "name": "problemCategoryId",
+            "name": "faultCategoryId",
             "in": "path",
             "required": true,
             "schema": {
@@ -1021,22 +1202,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             }
           }
@@ -1047,17 +1228,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               }
             }
@@ -1130,12 +1311,12 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/problemcategory/{problemCategoryId}/obsolete": {
+    "/api/admin/v1/component-types/{componentTypeId}/fault-categories/{faultCategoryId}/obsolete": {
       "post": {
         "tags": [
           "ComponentType"
         ],
-        "summary": "set problem category to obsolete",
+        "summary": "set fault category to obsolete",
         "parameters": [
           {
             "name": "componentTypeId",
@@ -1147,7 +1328,7 @@
             }
           },
           {
-            "name": "problemCategoryId",
+            "name": "faultCategoryId",
             "in": "path",
             "required": true,
             "schema": {
@@ -1228,7 +1409,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/binary-file": {
+    "/api/admin/v1/component-types/{componentTypeId}/binary-files": {
       "post": {
         "tags": [
           "ComponentType"
@@ -1321,7 +1502,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/binary-file/{binaryFileId}": {
+    "/api/admin/v1/component-types/{componentTypeId}/binary-files/{binaryFileId}": {
       "delete": {
         "tags": [
           "ComponentType"
@@ -1379,7 +1560,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants": {
       "get": {
         "tags": [
           "ComponentType"
@@ -1404,7 +1585,17 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                      }
+                    ]
                   }
                 }
               },
@@ -1412,7 +1603,17 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                      }
+                    ]
                   }
                 }
               },
@@ -1420,7 +1621,17 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                      }
+                    ]
                   }
                 }
               }
@@ -1519,17 +1730,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               }
             }
@@ -1602,7 +1843,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{componentTypeVariantId}": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{componentTypeVariantId}": {
       "put": {
         "tags": [
           "ComponentType"
@@ -1658,17 +1899,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               }
             }
@@ -1837,7 +2108,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{componentTypeVariantId}/lifecycle": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{componentTypeVariantId}/life-cycle": {
       "post": {
         "tags": [
           "ComponentType"
@@ -1869,17 +2140,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               }
             }
@@ -1952,7 +2253,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{componentTypeVariantId}/binary-file": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{componentTypeVariantId}/binary-files": {
       "post": {
         "tags": [
           "ComponentType"
@@ -2053,7 +2354,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{componentTypeVariantId}/binary-file/{binaryFileId}": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{componentTypeVariantId}/binary-files/{binaryFileId}": {
       "delete": {
         "tags": [
           "ComponentType"
@@ -2119,7 +2420,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{variantId}/version": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{variantId}/versions": {
       "get": {
         "tags": [
           "ComponentType"
@@ -2153,7 +2454,17 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                      }
+                    ]
                   }
                 }
               },
@@ -2161,7 +2472,17 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                      }
+                    ]
                   }
                 }
               },
@@ -2169,7 +2490,17 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                      },
+                      {
+                        "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                      }
+                    ]
                   }
                 }
               }
@@ -2257,17 +2588,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               }
             }
@@ -2340,7 +2701,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{variantId}/version/{versionId}": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{variantId}/versions/{versionId}": {
       "get": {
         "tags": [
           "ComponentType"
@@ -2381,17 +2742,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               }
             }
@@ -2487,17 +2878,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               }
             }
@@ -2655,7 +3076,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{variantId}/version/{versionId}/lifecycle": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{variantId}/versions/{versionId}/life-cycle": {
       "post": {
         "tags": [
           "ComponentType"
@@ -2696,17 +3117,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               }
             }
@@ -2739,7 +3190,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{componentTypeVariantId}/version/{versionId}/binary-file": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{componentTypeVariantId}/versions/{versionId}/binary-files": {
       "post": {
         "tags": [
           "ComponentType"
@@ -2848,7 +3299,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/{componentTypeId}/componenttypevariant/{componentTypeVariantId}/version/{versionId}/binary-file/{binaryFileId}": {
+    "/api/admin/v1/component-types/{componentTypeId}/component-type-variants/{componentTypeVariantId}/versions/{versionId}/binary-files/{binaryFileId}": {
       "delete": {
         "tags": [
           "ComponentType"
@@ -2922,7 +3373,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/firmware": {
+    "/api/admin/v1/component-types/firmwares": {
       "post": {
         "tags": [
           "ComponentType"
@@ -2958,17 +3409,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareComponentTypeDto"
+                  "$ref": "#/components/schemas/FirmwareTypeDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareComponentTypeDto"
+                  "$ref": "#/components/schemas/FirmwareTypeDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareComponentTypeDto"
+                  "$ref": "#/components/schemas/FirmwareTypeDto"
                 }
               }
             }
@@ -3021,7 +3472,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/firmware/{id}": {
+    "/api/admin/v1/component-types/firmwares/{id}": {
       "put": {
         "tags": [
           "ComponentType"
@@ -3068,17 +3519,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareComponentTypeDto"
+                  "$ref": "#/components/schemas/FirmwareTypeDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareComponentTypeDto"
+                  "$ref": "#/components/schemas/FirmwareTypeDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareComponentTypeDto"
+                  "$ref": "#/components/schemas/FirmwareTypeDto"
                 }
               }
             }
@@ -3151,7 +3602,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/firmware/{firmwareId}/firmwarevariant": {
+    "/api/admin/v1/component-types/firmwares/{firmwareId}/firmware-variants": {
       "post": {
         "tags": [
           "ComponentType"
@@ -3198,17 +3649,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareVariantDto"
+                  "$ref": "#/components/schemas/FirmwareTypeVariantDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareVariantDto"
+                  "$ref": "#/components/schemas/FirmwareTypeVariantDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareVariantDto"
+                  "$ref": "#/components/schemas/FirmwareTypeVariantDto"
                 }
               }
             }
@@ -3281,7 +3732,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/firmware/{firmwareId}/firmwarevariant/{firmwareVariantId}": {
+    "/api/admin/v1/component-types/firmwares/{firmwareId}/firmware-variants/{firmwareVariantId}": {
       "put": {
         "tags": [
           "ComponentType"
@@ -3337,17 +3788,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                    }
+                  ]
                 }
               }
             }
@@ -3420,7 +3901,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/firmware/{firmwareId}/firmwarevariant/{variantId}/firmwareversion": {
+    "/api/admin/v1/component-types/firmwares/{firmwareId}/firmware-variants/{variantId}/firmware-versions": {
       "post": {
         "tags": [
           "ComponentType"
@@ -3476,17 +3957,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareVersionDto"
+                  "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareVersionDto"
+                  "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FirmwareVersionDto"
+                  "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
                 }
               }
             }
@@ -3559,7 +4040,7 @@
         ]
       }
     },
-    "/api/adminV1/ComponentType/firmware/{firmwareId}/firmwarevariant/{variantId}/firmwareversion/{versionId}": {
+    "/api/admin/v1/component-types/firmwares/{firmwareId}/firmware-variants/{variantId}/firmware-versions/{versionId}": {
       "put": {
         "tags": [
           "ComponentType"
@@ -3624,17 +4105,47 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                    },
+                    {
+                      "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                    }
+                  ]
                 }
               }
             }
@@ -3707,7 +4218,792 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType": {
+    "/api/admin/v1/component-types/boot-loaders": {
+      "post": {
+        "tags": [
+          "ComponentType"
+        ],
+        "summary": "Creates boot loader type",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided \nBadRequest ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/component-types/boot-loaders/{id}": {
+      "put": {
+        "tags": [
+          "ComponentType"
+        ],
+        "summary": "Updates boot loader type",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided \nBadRequest ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/component-types/boot-loaders/{bootLoaderTypeId}/variants": {
+      "post": {
+        "tags": [
+          "ComponentType"
+        ],
+        "summary": "Creates boot loader type variant",
+        "parameters": [
+          {
+            "name": "bootLoaderTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided \nBadRequest ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/component-types/boot-loaders/{bootLoaderTypeId}/variants/{variantId}": {
+      "put": {
+        "tags": [
+          "ComponentType"
+        ],
+        "summary": "Updates boot loader type variant",
+        "parameters": [
+          {
+            "name": "bootLoaderTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided \nBadRequest ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/component-types/boot-loaders/{bootLoaderTypeId}/variants/{variantId}/versions": {
+      "post": {
+        "tags": [
+          "ComponentType"
+        ],
+        "summary": "Creates boot loader type variant version",
+        "parameters": [
+          {
+            "name": "bootLoaderTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided \nBadRequest ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/component-types/boot-loaders/{bootLoaderTypeId}/variants/{variantId}/versions/{versionId}": {
+      "put": {
+        "tags": [
+          "ComponentType"
+        ],
+        "summary": "Updates boot loader type variant version",
+        "parameters": [
+          {
+            "name": "bootLoaderTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "variantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBootLoaderTypeVariantVersionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ErrorCode(BAD_PARAMETERS_PROVIDED) bad parameters provided \nBadRequest ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/device-types": {
       "get": {
         "tags": [
           "DeviceType"
@@ -3868,7 +5164,7 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{id}": {
+    "/api/admin/v1/device-types/{id}": {
       "get": {
         "tags": [
           "DeviceType"
@@ -4112,12 +5408,12 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/problemcategory": {
+    "/api/admin/v1/device-types/{deviceTypeId}/fault-categories": {
       "get": {
         "tags": [
           "DeviceType"
         ],
-        "summary": "Get all problem categories",
+        "summary": "Get all fault categories",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -4137,7 +5433,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               },
@@ -4145,7 +5441,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               },
@@ -4153,7 +5449,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               }
@@ -4230,7 +5526,7 @@
         "tags": [
           "DeviceType"
         ],
-        "summary": "Create a new problem category",
+        "summary": "Create a new fault category",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -4246,22 +5542,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             }
           }
@@ -4272,17 +5568,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               }
             }
@@ -4355,12 +5651,12 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/problemcategory/{problemCategoryId}": {
+    "/api/admin/v1/device-types/{deviceTypeId}/fault-categories/{faultCategoryId}": {
       "put": {
         "tags": [
           "DeviceType"
         ],
-        "summary": "Update problem category",
+        "summary": "Update fault category",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -4372,7 +5668,7 @@
             }
           },
           {
-            "name": "problemCategoryId",
+            "name": "faultCategoryId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4385,22 +5681,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             }
           }
@@ -4411,17 +5707,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               }
             }
@@ -4494,12 +5790,12 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/problemcategory/{problemCategoryId}/obsolete": {
+    "/api/admin/v1/device-types/{deviceTypeId}/fault-categories/{faultCategoryId}/obsolete": {
       "post": {
         "tags": [
           "DeviceType"
         ],
-        "summary": "set problem category to obsolete",
+        "summary": "set fault category to obsolete",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -4511,7 +5807,7 @@
             }
           },
           {
-            "name": "problemCategoryId",
+            "name": "faultCategoryId",
             "in": "path",
             "required": true,
             "schema": {
@@ -4592,7 +5888,7 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/componenttypeplaceholder": {
+    "/api/admin/v1/device-types/{deviceTypeId}/component-type-placeholders": {
       "get": {
         "tags": [
           "DeviceType"
@@ -4795,7 +6091,7 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/componenttypeplaceholder/{placeholderId}": {
+    "/api/admin/v1/device-types/{deviceTypeId}/component-type-placeholders/{placeholderId}": {
       "put": {
         "tags": [
           "DeviceType"
@@ -5010,7 +6306,7 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/componenttypeplaceholder/{placeholderId}/lifecycle": {
+    "/api/admin/v1/device-types/{deviceTypeId}/component-type-placeholders/{placeholderId}/life-cycle": {
       "post": {
         "tags": [
           "DeviceType"
@@ -5085,12 +6381,12 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/componenttypeplaceholder/{placeholderId}/problemcategory": {
+    "/api/admin/v1/device-types/{deviceTypeId}/component-type-placeholders/{placeholderId}/fault-categories": {
       "get": {
         "tags": [
           "DeviceType"
         ],
-        "summary": "Get all problem categories",
+        "summary": "Get all fault categories",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -5119,7 +6415,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               },
@@ -5127,7 +6423,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               },
@@ -5135,7 +6431,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProblemCategoryDto"
+                    "$ref": "#/components/schemas/FaultCategoryDto"
                   }
                 }
               }
@@ -5212,7 +6508,7 @@
         "tags": [
           "DeviceType"
         ],
-        "summary": "Create a new problem category",
+        "summary": "Create a new fault category",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -5237,22 +6533,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             }
           }
@@ -5263,17 +6559,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               }
             }
@@ -5346,12 +6642,12 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/componenttypeplaceholder/{placeholderId}/problemcategory/{problemCategoryId}": {
+    "/api/admin/v1/device-types/{deviceTypeId}/component-type-placeholders/{placeholderId}/fault-categories/{faultCategoryId}": {
       "put": {
         "tags": [
           "DeviceType"
         ],
-        "summary": "Update problem category",
+        "summary": "Update fault category",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -5372,7 +6668,7 @@
             }
           },
           {
-            "name": "problemCategoryId",
+            "name": "faultCategoryId",
             "in": "path",
             "required": true,
             "schema": {
@@ -5385,22 +6681,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateProblemCategoryDto"
+                "$ref": "#/components/schemas/CreateFaultCategoryDto"
               }
             }
           }
@@ -5411,17 +6707,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProblemCategoryDto"
+                  "$ref": "#/components/schemas/FaultCategoryDto"
                 }
               }
             }
@@ -5494,12 +6790,12 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{deviceTypeId}/componenttypeplaceholder/{placeholderId}/problemcategory/{problemCategoryId}/obsolete": {
+    "/api/admin/v1/device-types/{deviceTypeId}/component-type-placeholders/{placeholderId}/fault-categories/{faultCategoryId}/obsolete": {
       "post": {
         "tags": [
           "DeviceType"
         ],
-        "summary": "set problem category to obsolete",
+        "summary": "set fault category to obsolete",
         "parameters": [
           {
             "name": "deviceTypeId",
@@ -5520,7 +6816,7 @@
             }
           },
           {
-            "name": "problemCategoryId",
+            "name": "faultCategoryId",
             "in": "path",
             "required": true,
             "schema": {
@@ -5601,7 +6897,7 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{id}/binary-file": {
+    "/api/admin/v1/device-types/{id}/binary-files": {
       "post": {
         "tags": [
           "DeviceType"
@@ -5694,7 +6990,7 @@
         ]
       }
     },
-    "/api/adminV1/DeviceType/{id}/binary-file/{binaryFileId}": {
+    "/api/admin/v1/device-types/{id}/binary-files/{binaryFileId}": {
       "delete": {
         "tags": [
           "DeviceType"
@@ -5752,7 +7048,419 @@
         ]
       }
     },
-    "/api/adminV1/ResourceType": {
+    "/api/admin/v1/device-types/{id}/problem-types/{problemTypeId}": {
+      "post": {
+        "tags": [
+          "DeviceType"
+        ],
+        "summary": "Assign problem type to device type",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "problemTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "ErrorCode(ENTITY_ALREADY_EXISTS) entity already exists ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "DeviceType"
+        ],
+        "summary": "Unassign problem type from device type",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "problemTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/problem-types": {
+      "get": {
+        "tags": [
+          "ProblemType"
+        ],
+        "summary": "Get all problem types",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProblemTypeDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProblemTypeDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProblemTypeDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ProblemType"
+        ],
+        "summary": "Create problem type",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemTypeDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/problem-types/{problemTypeId}": {
+      "put": {
+        "tags": [
+          "ProblemType"
+        ],
+        "summary": "Update problem type",
+        "parameters": [
+          {
+            "name": "problemTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProblemTypeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemTypeDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemTypeDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemTypeDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "UnprocessableEntity ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResultErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ProblemType"
+        ],
+        "summary": "Delete problem type",
+        "parameters": [
+          {
+            "name": "problemTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "ErrorCode(REFERENCED_DATA_NOT_FOUND) referenced data not found ",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": [ ]
+          }
+        ]
+      }
+    },
+    "/api/admin/v1/resource-types": {
       "get": {
         "tags": [
           "ResourceType"
@@ -5893,7 +7601,7 @@
         ]
       }
     },
-    "/api/adminV1/ResourceType/{id}": {
+    "/api/admin/v1/resource-types/{id}": {
       "get": {
         "tags": [
           "ResourceType"
@@ -6212,7 +7920,42 @@
             "type": "string",
             "nullable": true
           },
-          "tag": {
+          "fileSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "catalogElementDescription": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LifeCycleStateValue": {
+        "enum": [
+          "Unpublished",
+          "Alpha",
+          "Beta",
+          "Published",
+          "Deprecated"
+        ],
+        "type": "string"
+      },
+      "BinaryFileDto": {
+        "type": "object",
+        "properties": {
+          "originalFileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
             "type": "string",
             "nullable": true
           },
@@ -6228,29 +7971,316 @@
             "type": "string",
             "format": "date-time"
           },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
+          "catalogElementDescription": {
             "$ref": "#/components/schemas/CatalogElementDescriptionDto"
           }
         },
         "additionalProperties": false
       },
-      "CatalogItemDto": {
+      "VersionNumberDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
+          "versionType": {
+            "type": "string",
+            "nullable": true
           },
-          "property": {
+          "versionText": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
+      },
+      "BaseComponentTypeVariantVersionDto": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "lifeCycleState": {
+            "$ref": "#/components/schemas/LifeCycleStateValue"
+          },
+          "effectiveLifeCycleState": {
+            "$ref": "#/components/schemas/LifeCycleStateValue"
+          },
+          "versionNumber": {
+            "$ref": "#/components/schemas/VersionNumberDto"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFileDto"
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "catalogElementDescription": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "kind"
+        }
+      },
+      "ComponentTypeVariantVersionDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeVariantVersionDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "FirmwareUpdatePriority": {
+        "enum": [
+          "Normal",
+          "Important"
+        ],
+        "type": "string"
+      },
+      "FirmwareTypeVariantVersionDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeVariantVersionDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "firmwareFileId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "firmwareUpdatePriority": {
+                "$ref": "#/components/schemas/FirmwareUpdatePriority"
+              },
+              "minimumVersionForUpdateId": {
+                "type": "string",
+                "format": "uuid",
+                "nullable": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BootLoaderTypeVariantVersionDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeVariantVersionDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BaseComponentTypeVariantDto": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "lifeCycleState": {
+            "$ref": "#/components/schemas/LifeCycleStateValue"
+          },
+          "effectiveLifeCycleState": {
+            "$ref": "#/components/schemas/LifeCycleStateValue"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFileDto"
+            },
+            "nullable": true
+          },
+          "componentTypeVariantVersions": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
+                },
+                {
+                  "$ref": "#/components/schemas/FirmwareTypeVariantVersionDto"
+                },
+                {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantVersionDto"
+                }
+              ]
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "catalogElementDescription": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "kind"
+        }
+      },
+      "ComponentTypeVariantDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeVariantDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "FirmwareTypeVariantDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeVariantDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BootLoaderTypeVariantDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeVariantDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BaseComponentTypeDto": {
+        "required": [
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "lifeCycleState": {
+            "$ref": "#/components/schemas/LifeCycleStateValue"
+          },
+          "effectiveLifeCycleState": {
+            "$ref": "#/components/schemas/LifeCycleStateValue"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BinaryFileDto"
+            },
+            "nullable": true
+          },
+          "componentTypeVariants": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/ComponentTypeVariantDto"
+                },
+                {
+                  "$ref": "#/components/schemas/FirmwareTypeVariantDto"
+                },
+                {
+                  "$ref": "#/components/schemas/BootLoaderTypeVariantDto"
+                }
+              ]
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "catalogElementDescription": {
+            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "kind"
+        }
+      },
+      "ComponentTypeDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "FirmwareTypeDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BootLoaderTypeDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IdentifiableComponentTypeDto": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseComponentTypeDto"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "identifier": {
+                "type": "string",
+                "nullable": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
       },
       "CreateCatalogElementDescriptionDto": {
         "type": "object",
@@ -6275,12 +8305,18 @@
         },
         "additionalProperties": false
       },
+      "Identifier": {
+        "enum": [
+          "Eui64",
+          "SerialNumber"
+        ],
+        "type": "string"
+      },
       "CreateIdentifiableComponentTypeDto": {
         "type": "object",
         "properties": {
           "identifier": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/Identifier"
           },
           "description": {
             "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
@@ -6301,8 +8337,7 @@
         "type": "object",
         "properties": {
           "identifier": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/Identifier"
           },
           "description": {
             "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
@@ -6310,7 +8345,7 @@
         },
         "additionalProperties": false
       },
-      "ProblemCategoryDto": {
+      "FaultCategoryDto": {
         "type": "object",
         "properties": {
           "id": {
@@ -6330,7 +8365,7 @@
         },
         "additionalProperties": false
       },
-      "CreateProblemCategoryDto": {
+      "CreateFaultCategoryDto": {
         "type": "object",
         "properties": {
           "description": {
@@ -6345,10 +8380,6 @@
           "description": {
             "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
           },
-          "tag": {
-            "type": "string",
-            "nullable": true
-          },
           "content": {
             "type": "string",
             "format": "byte",
@@ -6361,139 +8392,6 @@
           "contentType": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "BinaryFileDto": {
-        "type": "object",
-        "properties": {
-          "originalFileName": {
-            "type": "string",
-            "nullable": true
-          },
-          "contentType": {
-            "type": "string",
-            "nullable": true
-          },
-          "tag": {
-            "type": "string",
-            "nullable": true
-          },
-          "fileSize": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "VersionNumberDto": {
-        "type": "object",
-        "properties": {
-          "versionType": {
-            "type": "string",
-            "nullable": true
-          },
-          "versionText": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ComponentTypeVariantVersionDto": {
-        "type": "object",
-        "properties": {
-          "lifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "effectiveLifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "versionNumber": {
-            "$ref": "#/components/schemas/VersionNumberDto"
-          },
-          "binaryFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BinaryFileDto"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ComponentTypeVariantDto": {
-        "type": "object",
-        "properties": {
-          "lifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "effectiveLifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "binaryFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BinaryFileDto"
-            },
-            "nullable": true
-          },
-          "componentVariantVersions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
           }
         },
         "additionalProperties": false
@@ -6528,49 +8426,6 @@
         },
         "additionalProperties": false
       },
-      "FirmwareComponentTypeDto": {
-        "type": "object",
-        "properties": {
-          "lifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "effectiveLifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "binaryFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BinaryFileDto"
-            },
-            "nullable": true
-          },
-          "componentVariants": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ComponentTypeVariantDto"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
-          }
-        },
-        "additionalProperties": false
-      },
       "UpdateFirmwareComponentTypeDto": {
         "type": "object",
         "properties": {
@@ -6589,49 +8444,6 @@
         },
         "additionalProperties": false
       },
-      "FirmwareVariantDto": {
-        "type": "object",
-        "properties": {
-          "lifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "effectiveLifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "binaryFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BinaryFileDto"
-            },
-            "nullable": true
-          },
-          "componentVariantVersions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ComponentTypeVariantVersionDto"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
-          }
-        },
-        "additionalProperties": false
-      },
       "UpdateFirmwareVariantDto": {
         "type": "object",
         "properties": {
@@ -6644,8 +8456,8 @@
       "CreateFirmwareVersionDto": {
         "type": "object",
         "properties": {
-          "isMandatory": {
-            "type": "boolean"
+          "firmwareUpdatePriority": {
+            "$ref": "#/components/schemas/FirmwareUpdatePriority"
           },
           "minimumVersionForUpdateId": {
             "type": "string",
@@ -6673,58 +8485,11 @@
         },
         "additionalProperties": false
       },
-      "FirmwareVersionDto": {
-        "type": "object",
-        "properties": {
-          "isMandatory": {
-            "type": "boolean"
-          },
-          "minimumVersionForUpdateId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "lifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "effectiveLifeCycle": {
-            "type": "string",
-            "nullable": true
-          },
-          "versionNumber": {
-            "$ref": "#/components/schemas/VersionNumberDto"
-          },
-          "binaryFiles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/BinaryFileDto"
-            },
-            "nullable": true
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "lastUpdatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
-            "$ref": "#/components/schemas/CatalogElementDescriptionDto"
-          }
-        },
-        "additionalProperties": false
-      },
       "UpdateFirmwareVersionDto": {
         "type": "object",
         "properties": {
-          "isMandatory": {
-            "type": "boolean"
+          "firmwareUpdatePriority": {
+            "$ref": "#/components/schemas/FirmwareUpdatePriority"
           },
           "minimumVersionForUpdateId": {
             "type": "string",
@@ -6745,10 +8510,6 @@
         "properties": {
           "description": {
             "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
-          },
-          "tag": {
-            "type": "string",
-            "nullable": true
           },
           "content": {
             "type": "string",
@@ -6778,6 +8539,44 @@
         },
         "additionalProperties": false
       },
+      "CreateBootLoaderTypeDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateBootLoaderTypeVariantDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateBootLoaderTypeVariantVersionDto": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
+          },
+          "versionNumber": {
+            "$ref": "#/components/schemas/VersionNumberDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeviceTypeKindValue": {
+        "enum": [
+          "Edge",
+          "NonEdge",
+          "MixedEdge"
+        ],
+        "type": "string"
+      },
       "DeviceTypeDto": {
         "type": "object",
         "properties": {
@@ -6786,12 +8585,10 @@
             "format": "uuid"
           },
           "deviceTypeKind": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/DeviceTypeKindValue"
           },
           "lifeCycle": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/LifeCycleStateValue"
           },
           "oemCustomerIds": {
             "type": "array",
@@ -6818,8 +8615,7 @@
             "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
           },
           "deviceTypeKind": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/DeviceTypeKindValue"
           },
           "oemCustomerIds": {
             "type": "array",
@@ -6831,6 +8627,22 @@
           }
         },
         "additionalProperties": false
+      },
+      "VisibilityValue": {
+        "enum": [
+          "Everyone",
+          "Maintenance",
+          "OemCustomer"
+        ],
+        "type": "string"
+      },
+      "ExchangeabilityValue": {
+        "enum": [
+          "Exchangeable",
+          "NotExchangeable",
+          "ExchangeableWithChildren"
+        ],
+        "type": "string"
       },
       "ComponentTypePlaceholderDto": {
         "type": "object",
@@ -6863,19 +8675,16 @@
             "$ref": "#/components/schemas/CatalogElementDescriptionDto"
           },
           "lifeCycle": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/LifeCycleStateValue"
           },
           "visibility": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/VisibilityValue"
           },
           "isDefiningVisibility": {
             "type": "boolean"
           },
           "exchangeability": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ExchangeabilityValue"
           },
           "isMandatory": {
             "type": "boolean"
@@ -6899,15 +8708,13 @@
             "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
           },
           "visibility": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/VisibilityValue"
           },
           "isDefiningVisibility": {
             "type": "boolean"
           },
           "exchangeability": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ExchangeabilityValue"
           },
           "isMandatory": {
             "type": "boolean"
@@ -6915,32 +8722,72 @@
         },
         "additionalProperties": false
       },
-      "BigInteger": {
+      "ProblemTypeSolution": {
+        "enum": [
+          "DummySolution1",
+          "DummySolution2",
+          "DummySolution3"
+        ],
+        "type": "string"
+      },
+      "ProblemTypeDto": {
         "type": "object",
         "properties": {
-          "isPowerOfTwo": {
-            "type": "boolean",
-            "readOnly": true
+          "id": {
+            "type": "string",
+            "format": "uuid"
           },
-          "isZero": {
-            "type": "boolean",
-            "readOnly": true
+          "title": {
+            "$ref": "#/components/schemas/PhraseDto"
           },
-          "isOne": {
-            "type": "boolean",
-            "readOnly": true
+          "isObsolete": {
+            "type": "boolean"
           },
-          "isEven": {
-            "type": "boolean",
-            "readOnly": true
+          "isCommon": {
+            "type": "boolean"
           },
-          "sign": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
+          "solutions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProblemTypeSolution"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
+      },
+      "CreateProblemTypeDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/PhraseDto"
+          },
+          "isObsolete": {
+            "type": "boolean"
+          },
+          "isCommon": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecificDataType": {
+        "enum": [
+          "None",
+          "Int8",
+          "Int16",
+          "Int32",
+          "Int64",
+          "Uint8",
+          "Uint16",
+          "Uint32",
+          "Uint64",
+          "Double",
+          "String",
+          "Bool",
+          "Array"
+        ],
+        "type": "string"
       },
       "RuleMessageDto": {
         "type": "object",
@@ -6959,10 +8806,10 @@
         "type": "object",
         "properties": {
           "minValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "maxValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "ruleMessage": {
             "$ref": "#/components/schemas/RuleMessageDto"
@@ -6972,8 +8819,7 @@
             "nullable": true
           },
           "specificDataType": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/SpecificDataType"
           }
         },
         "additionalProperties": false
@@ -6984,7 +8830,7 @@
           "discreteValues": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BigInteger"
+              "type": "string"
             },
             "nullable": true
           },
@@ -6996,8 +8842,7 @@
             "nullable": true
           },
           "specificDataType": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/SpecificDataType"
           }
         },
         "additionalProperties": false
@@ -7006,10 +8851,10 @@
         "type": "object",
         "properties": {
           "lowerBoundary": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "upperBoundary": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -7032,8 +8877,7 @@
             "nullable": true
           },
           "specificDataType": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/SpecificDataType"
           }
         },
         "additionalProperties": false
@@ -7053,8 +8897,7 @@
             "nullable": true
           },
           "specificDataType": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/SpecificDataType"
           }
         },
         "additionalProperties": false
@@ -7097,6 +8940,13 @@
         "type": "object",
         "additionalProperties": false
       },
+      "ValueDisplayBehavior": {
+        "enum": [
+          "ActualValueBehavior",
+          "ClassifiedValueBehavior"
+        ],
+        "type": "string"
+      },
       "StringDropDownControlDto": {
         "type": "object",
         "properties": {
@@ -7108,8 +8958,7 @@
             "nullable": true
           },
           "valueDisplayBehavior": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ValueDisplayBehavior"
           }
         },
         "additionalProperties": false
@@ -7120,13 +8969,12 @@
           "values": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BigInteger"
+              "type": "string"
             },
             "nullable": true
           },
           "valueDisplayBehavior": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ValueDisplayBehavior"
           }
         },
         "additionalProperties": false
@@ -7135,10 +8983,10 @@
         "type": "object",
         "properties": {
           "falseValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "trueValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           }
         },
         "additionalProperties": false
@@ -7147,10 +8995,10 @@
         "type": "object",
         "properties": {
           "startValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "stepSize": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "numberOfSteps": {
             "type": "integer",
@@ -7165,7 +9013,7 @@
           "discreteValues": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BigInteger"
+              "type": "string"
             },
             "nullable": true
           }
@@ -7188,14 +9036,13 @@
         "type": "object",
         "properties": {
           "minimumValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "maximumValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "valueDisplayBehavior": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/ValueDisplayBehavior"
           },
           "stepControlType": {
             "type": "string",
@@ -7348,8 +9195,7 @@
             "format": "int32"
           },
           "visibility": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/VisibilityValue"
           },
           "hasReadAllowance": {
             "type": "boolean"
@@ -7358,8 +9204,7 @@
             "type": "boolean"
           },
           "dataType": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/SpecificDataType"
           },
           "minimumInstanceCount": {
             "type": "integer",
@@ -7390,11 +9235,7 @@
             "type": "string",
             "format": "date-time"
           },
-          "version": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "description": {
+          "catalogElementDescription": {
             "$ref": "#/components/schemas/CatalogElementDescriptionDto"
           }
         },
@@ -7404,10 +9245,10 @@
         "type": "object",
         "properties": {
           "minValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "maxValue": {
-            "$ref": "#/components/schemas/BigInteger"
+            "type": "string"
           },
           "ruleMessage": {
             "$ref": "#/components/schemas/RuleMessageDto"
@@ -7425,7 +9266,7 @@
           "discreteValues": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BigInteger"
+              "type": "string"
             },
             "nullable": true
           },
@@ -7521,8 +9362,7 @@
             "format": "int32"
           },
           "visibility": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/VisibilityValue"
           },
           "hasReadAllowance": {
             "type": "boolean"
@@ -7531,8 +9371,7 @@
             "type": "boolean"
           },
           "dataType": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/SpecificDataType"
           },
           "minimumInstanceCount": {
             "type": "integer",
@@ -7565,8 +9404,7 @@
             "$ref": "#/components/schemas/CreateCatalogElementDescriptionDto"
           },
           "visibility": {
-            "type": "string",
-            "nullable": true
+            "$ref": "#/components/schemas/VisibilityValue"
           },
           "hasReadAllowance": {
             "type": "boolean"
